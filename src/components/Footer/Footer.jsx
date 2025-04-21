@@ -27,10 +27,10 @@ const Footer = () => {
                 </ul>
                 <div className="border border-gray-200"></div>
                 <div className="flex justify-center gap-3 text-2xl">
-                    <FaFacebook />
-                    <FaXTwitter />
-                    <FaLinkedin />
-                    <FaYoutube />
+                    <a href="https://www.facebook.com/mustakahmmed793"><FaFacebook /></a>
+                    <a href="https://www.x.com/mustakahmmed_ar"><FaXTwitter /></a>
+                    <a href="https://www.linkedin.com/in/mustakahmmed/"><FaLinkedin /></a>
+                    <a href="https://www.youtube.com"><FaYoutube /></a>
                 </div>
             </div>
         </div>

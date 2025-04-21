@@ -18,3 +18,14 @@ body{
     text-decoration: underline;
     
 }
+.available-btn{
+    color: green;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 50px;
+}
+.experience-btn{
+    color: blue;
+    padding: 8px 12px;
+    border-radius: 50px;
+}
