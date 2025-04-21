@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+body{
+    background-color: #EFEFEF;
+    min-height: 100vh;
+}
 
 /* Personal common styles components */
 .btn-my-default{
