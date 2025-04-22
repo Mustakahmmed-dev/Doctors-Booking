@@ -1,5 +1,7 @@
 import { useLoaderData } from "react-router";
 import BookingCard from "../BookingCard/BookingCard";
+import { Bar, BarChart, Tooltip, XAxis, YAxis } from "recharts";
+
 
 const Bookings = () => {
     const loadedData = useLoaderData();
@@ -7,13 +9,36 @@ const Bookings = () => {
     const bookedDoctorsList = JSON.parse(bookedDoctorsData);
 
     const bookedDoctors = loadedData.filter(data => bookedDoctorsList.includes(data.id));
-    // console.log(bookedDoctors)
+
+    const TriangleBar = (props) => {
+        const { fill, x, y, width, height } = props;
+        
+        const path = `
+          M${x},${y + height}
+          C${x + width/3},${y + height} 
+          ${x + width/2},${y + height/3} 
+          ${x + width/2},${y}
+          C${x + width/2},${y + height/3} 
+          ${x + 2*width/3},${y + height} 
+          ${x + width},${y + height}
+          Z
+        `;
+      
+        return <path d={path} fill={fill} />;
+      };
 
     return (
         <div className="my-5 flex flex-col gap-7">
 
             <div className="rounded-lg bg-white p-5">
-                For charts
+                <BarChart width={600} height={300} data={bookedDoctors}>
+                    <XAxis dataKey="name"></XAxis>
+                    <YAxis></YAxis>
+                    <Tooltip></Tooltip>
+                    <Bar dataKey="consultation_fee" fill="#8884d8" shape={<TriangleBar />}>
+
+                    </Bar>
+                </BarChart>
             </div>
 
             <div className="space-y-4">
