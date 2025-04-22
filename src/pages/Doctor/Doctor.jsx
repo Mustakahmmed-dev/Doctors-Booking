@@ -17,7 +17,7 @@ const Doctor = ({ data }) => {
             <div className="border border-dashed border-gray-300"></div>
             <h2 className="text-gray-600 font-semibold"> &reg; Reg No: {registration_number} </h2>
             <div className="flex">
-                <button className="btn flex-grow-1 btn-outline btn-primary rounded-full font-bold"> <Link to={`/doctor-details/${id}`}>View Details</Link> </button>
+               <Link  className="btn flex-grow-1 btn-outline btn-primary rounded-full font-bold" to={`/doctor-details/${id}`}>View Details</Link>
             </div>
         </div>
     )
