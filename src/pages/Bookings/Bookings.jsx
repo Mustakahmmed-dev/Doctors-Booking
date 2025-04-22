@@ -1,31 +1,38 @@
 import { useLoaderData } from "react-router";
 import BookingCard from "../BookingCard/BookingCard";
 import { Bar, BarChart, Tooltip, XAxis, YAxis } from "recharts";
+import { getBookedDoctor, removeDoctor } from "../../utility/utility";
+import { Suspense, useState } from "react";
 
 
 const Bookings = () => {
     const loadedData = useLoaderData();
-    const bookedDoctorsData = localStorage.getItem("bookedDoctor");
-    const bookedDoctorsList = JSON.parse(bookedDoctorsData);
-
+    // const bookedDoctorsList = getBookedDoctor();
+    const [bookedDoctorsList, setBookedDoctorsList] = useState(getBookedDoctor());
     const bookedDoctors = loadedData.filter(data => bookedDoctorsList.includes(data.id));
 
+    const handleRemoveDoctor = (id) => {
+        removeDoctor(id);
+        setBookedDoctorsList(prev => prev.filter(doctorId => doctorId !== id));
+    }
+
+    // Triangle shape of the chart
     const TriangleBar = (props) => {
         const { fill, x, y, width, height } = props;
-        
+
         const path = `
           M${x},${y + height}
-          C${x + width/3},${y + height} 
-          ${x + width/2},${y + height/3} 
-          ${x + width/2},${y}
-          C${x + width/2},${y + height/3} 
-          ${x + 2*width/3},${y + height} 
+          C${x + width / 3},${y + height} 
+          ${x + width / 2},${y + height / 3} 
+          ${x + width / 2},${y}
+          C${x + width / 2},${y + height / 3} 
+          ${x + 2 * width / 3},${y + height} 
           ${x + width},${y + height}
           Z
         `;
-      
+
         return <path d={path} fill={fill} />;
-      };
+    };
 
     return (
         <div className="my-5 flex flex-col gap-7">
@@ -47,9 +54,11 @@ const Bookings = () => {
                     <p>Our platform connects you with verified, experienced doctors across various specialties — all at your convenience.</p>
                 </div>
                 <div className="flex flex-col gap-4">
-                    {
-                        bookedDoctors.map(doctor => <BookingCard key={doctor.id} doctor={doctor}></BookingCard>)
-                    }
+                    <Suspense fallback={<span>Loading data....</span>}>
+                        {
+                            bookedDoctors.map(doctor => <BookingCard key={doctor.id} doctor={doctor} handleRemoveDoctor={handleRemoveDoctor}></BookingCard>)
+                        }
+                    </Suspense>
                 </div>
             </div>
 

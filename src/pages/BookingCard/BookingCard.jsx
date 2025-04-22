@@ -1,7 +1,12 @@
+import {removeDoctor} from '../../utility/utility'
 
-const BookingCard = ({doctor}) => {
-    const {name, education, consultation_fee} = doctor;
+const BookingCard = ({doctor, handleRemoveDoctor}) => {
+    const {id, name, education, consultation_fee} = doctor;
 
+    const handleCancelAppointmentBtn = (id) => {
+        handleRemoveDoctor(id);
+        removeDoctor(id);
+    }
     return(
         <div className="flex flex-col p-5 bg-white rounded-lg space-y-5">
             <div className="flex justify-between items-center gap-4">
@@ -12,7 +17,7 @@ const BookingCard = ({doctor}) => {
                 <p className="text-gray-600 font-semibold">Appointment Fee: {consultation_fee} Taka + Vat </p>
             </div>
             <div className="border border-dashed border-gray-300"></div>
-            <button className="btn btn-outline btn-error font-semibold rounded-full">Cancel Appointment</button>
+            <button onClick={() => handleCancelAppointmentBtn(id)} className="btn btn-outline btn-error font-semibold rounded-full">Cancel Appointment</button>
         </div>
     )
 }
