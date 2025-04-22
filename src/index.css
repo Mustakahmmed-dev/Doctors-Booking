@@ -29,3 +29,10 @@ body{
     padding: 8px 12px;
     border-radius: 50px;
 }
+.yellow-badge{
+    color: orange;
+    font-weight: 400;
+    padding: 5px 10px;
+    border-radius: 50px;
+    background-color: #ffedd4;
+}
