@@ -1,6 +1,6 @@
 import { useLoaderData } from "react-router";
 import BookingCard from "../BookingCard/BookingCard";
-import { Bar, BarChart, Tooltip, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { Suspense, useEffect, useState } from "react";
 import { cancelDoctorBooking, getDoctor } from "../../utility/utility";
 import EmptyBookings from "../../components/EmptyBookings/EmptyBookings";
@@ -46,14 +46,16 @@ const Bookings = () => {
             <ToastContainer />
             <div className="my-5 flex flex-col gap-7">
                 <div className="rounded-lg bg-white p-5">
-                    <BarChart width={600} height={300} data={displayDoctors}>
-                        <XAxis dataKey="name"></XAxis>
-                        <YAxis></YAxis>
-                        <Tooltip></Tooltip>
-                        <Bar dataKey="consultation_fee" fill="#8884d8" shape={<TriangleBar />}>
+                    <ResponsiveContainer height={300}>
+                        <BarChart width={600} height={300} data={displayDoctors}>
+                            <XAxis dataKey="name"></XAxis>
+                            <YAxis></YAxis>
+                            <Tooltip></Tooltip>
+                            <Bar dataKey="consultation_fee" fill="#8884d8" shape={<TriangleBar />}>
 
-                        </Bar>
-                    </BarChart>
+                            </Bar>
+                        </BarChart>
+                    </ResponsiveContainer>
                 </div>
 
                 <div className="space-y-4">

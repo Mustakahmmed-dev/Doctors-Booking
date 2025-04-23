@@ -34,7 +34,7 @@ const DoctorDetails = () => {
                 <p className="md:max-w-[700px] mx-auto"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, doloribus accusamus quo cum repellat enim qui saepe possimus porro ad. </p>
             </div>
 
-            <div className="flex gap-4 rounded-lg p-6 bg-white space-y-4">
+            <div className="flex flex-col md:flex-row gap-4 rounded-lg p-6 bg-white space-y-4">
                 <img className="rounded-lg min-w-[350px]" src={doctor_image} alt="Picture of the doctor" />
                 <div className="space-y-3 flex-grow-1">
                     <h2 className="text-2xl font-bold"> {name} </h2>
