@@ -14,12 +14,13 @@ const Bookings = () => {
         setDisplayDoctors(getDoctor());
     }, [])
 
+
     const handleDelete = (id) => {
         cancelDoctorBooking(id);
         setDisplayDoctors(getDoctor());
     }
 
-    if(displayDoctors.length < 1) return <EmptyBookings></EmptyBookings>
+    if (displayDoctors.length < 1) return <EmptyBookings></EmptyBookings>
 
     // Triangle shape of the chart
     const TriangleBar = (props) => {
@@ -41,9 +42,8 @@ const Bookings = () => {
 
     return (
         <div className="my-5 flex flex-col gap-7">
-
-            {/* <div className="rounded-lg bg-white p-5">
-                <BarChart width={600} height={300} data={bookedDoctors}>
+            <div className="rounded-lg bg-white p-5">
+                <BarChart width={600} height={300} data={displayDoctors}>
                     <XAxis dataKey="name"></XAxis>
                     <YAxis></YAxis>
                     <Tooltip></Tooltip>
@@ -51,7 +51,7 @@ const Bookings = () => {
 
                     </Bar>
                 </BarChart>
-            </div> */}
+            </div>
 
             <div className="space-y-4">
                 <div className="text-center">
@@ -59,9 +59,11 @@ const Bookings = () => {
                     <p>Our platform connects you with verified, experienced doctors across various specialties — all at your convenience.</p>
                 </div>
                 <div className="flex flex-col gap-4">
+                    <Suspense fallback={<span className="loading loading-bars loading-xl"></span>}>
                         {
                             displayDoctors.map(doctor => <BookingCard key={doctor.id} doctor={doctor} handleDelete={handleDelete}></BookingCard>)
                         }
+                    </Suspense>
                 </div>
             </div>
 
