@@ -7,7 +7,7 @@ export const getDoctor = () => {
 export const addDoctor = (doctorProfile) => {
     const doctors = getDoctor();
     const isExist = doctors.find(doctor => doctor.id === doctorProfile.id);
-    if(isExist) return alert("It exists");
+    if(isExist) return console.log("It exists");
 
     doctors.push(doctorProfile);
     localStorage.setItem("Doctors", JSON.stringify(doctors));
