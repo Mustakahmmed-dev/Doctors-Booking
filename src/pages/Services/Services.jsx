@@ -20,17 +20,17 @@ const Services = () => {
                 </div>
                 <div className="p-5 rounded-lg bg-white space-y-3">
                     <img src={successReview} alt="" />
-                    <h1 className="text-3xl font-extrabold"> <CountUp end={564} delay={10} duration={10}></CountUp>+</h1>
+                    <h1 className="text-3xl font-extrabold"> <CountUp end={564} delay={5} duration={10}></CountUp>+</h1>
                     <p className="text-gray-500 font-semibold">Total Reviews</p>
                 </div>
                 <div className="p-5 rounded-lg bg-white space-y-3">
                     <img src={successPatients} alt="" />
-                    <h1 className="text-3xl font-extrabold"> <CountUp end={2332} delay={15} duration={10}></CountUp>+</h1>
+                    <h1 className="text-3xl font-extrabold"> <CountUp end={2332} delay={10} duration={10}></CountUp>+</h1>
                     <p className="text-gray-500 font-semibold">Total Patients</p>
                 </div>
                 <div className="p-5 rounded-lg bg-white space-y-3">
                     <img src={successStaffs} alt="" />
-                    <h1 className="text-3xl font-extrabold"> <CountUp end={453} delay={20} duration={10}></CountUp>+</h1>
+                    <h1 className="text-3xl font-extrabold"> <CountUp end={453} delay={10} duration={10}></CountUp>+</h1>
                     <p className="text-gray-500 font-semibold">Total Staffs</p>
                 </div>
                 

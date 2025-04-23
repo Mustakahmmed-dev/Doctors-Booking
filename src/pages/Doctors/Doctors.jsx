@@ -1,7 +1,10 @@
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import Doctor from "../Doctor/Doctor";
 
 const Doctors = ({loadedData}) => {
+   const [showAll, setShowAll] = useState(false);
+
+   const displayData = showAll ? loadedData : loadedData.slice(0, 8);
 
     return(
         <div className="max-w-6xl mx-auto">
@@ -12,11 +15,12 @@ const Doctors = ({loadedData}) => {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 ">
-               <Suspense fallback={<span className="loading loading-bars loading-xl"></span>}>
                {
-                    loadedData.map(data => <Doctor key={data.id} data={data}></Doctor>)
+                    displayData.map(data => <Doctor key={data.id} data={data}></Doctor>)
                 }
-               </Suspense>
+            </div>
+            <div className="text-center">
+            <button onClick={() => setShowAll(!showAll)} className="btn btn-primary my-4"> {showAll ? "View Less" : "View More"} </button>
             </div>
 
         </div>
