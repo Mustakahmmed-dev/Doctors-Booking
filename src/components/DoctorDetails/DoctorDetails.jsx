@@ -1,7 +1,7 @@
 import { useLoaderData, useParams, Link, useNavigate } from "react-router";
 import { BiError } from "react-icons/bi";
 import { ToastContainer, toast } from "react-toastify";
-import { addDoctor } from "../../utility/utility";
+import { addDoctor, getDoctor } from "../../utility/utility";
 import { useState } from "react";
 
 const DoctorDetails = () => {
@@ -12,15 +12,21 @@ const DoctorDetails = () => {
     const doctorProfile = doctorData.find(doctor => paramsID === doctor.id);
     const { id, name, doctor_image, education, hospital_affiliation, registration_number, consultation_fee, availability } = doctorProfile;
 
-    const [currentRoute, setCurrentRoute] = useState(false);
-    const handleAppointment = () => {
-        addDoctor(doctorProfile);
-        setCurrentRoute(true);
-    }
+    // Navigation from doctor details to bookings page
     const navigate = useNavigate();
-    if(currentRoute){
-        // navigate("/bookings");
+    const handleAppointment = () => {
+        const currentBookings = getDoctor();
+        const alreadyBooked = currentBookings.some(booking => booking.id === id);
+        if (alreadyBooked) {
+            toast.error(`You already have an appointment with ${name}`);
+            return;
+        }
+
+        // toast.success(`You have successfully booked this appointment with ${name}`);
+        addDoctor(doctorProfile);
+        navigate("/bookings")
     }
+ 
     return (
         <div className="flex flex-col gap-5 my-6">
             <div className="rounded-lg p-6 bg-white space-y-4 text-center">
@@ -58,6 +64,7 @@ const DoctorDetails = () => {
 
                 <p className="yellow-badge flex items-center gap-2"><BiError /> Due to high patient Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
                 <button onClick={() => handleAppointment()} className="btn-my-default cursor-pointer text-center">Book Appointment</button>
+                <ToastContainer/>
             </div>
         </div>
     )
