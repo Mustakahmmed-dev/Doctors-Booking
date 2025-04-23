@@ -1,0 +1,27 @@
+[
+    {
+      "id": 1,
+      "question": "What is useState and how does it work in React?",
+      "answer": "useState is a React Hook that lets you add state to functional components. It returns an array with two elements: the current state value and a function to update it. When the setter function is called, it triggers a re-render of the component with the new state value. Example: const [count, setCount] = useState(0);"
+    },
+    {
+      "id": 2,
+      "question": "What is the purpose of useEffect in React?",
+      "answer": "useEffect handles side effects in functional components. It runs after render and can perform operations like data fetching, subscriptions, or DOM manipulations. It takes a callback function and optional dependency array. Without dependencies, it runs after every render; with empty array, it runs once on mount; with values, it runs when they change."
+    },
+    {
+      "id": 3,
+      "question": "What is a custom hook in React and when should you use one?",
+      "answer": "A custom hook is a JavaScript function that uses other hooks to encapsulate reusable logic. You should create one when you need to share stateful logic between components. Custom hooks must start with 'use' (e.g., useFetch). They help avoid code duplication while keeping components clean and maintaining all hook rules."
+    },
+    {
+      "id": 4,
+      "question": "Difference between controlled and uncontrolled components? Which one is better?",
+      "answer": "Controlled components have form data handled by React state (single source of truth), while uncontrolled components let the DOM handle form data (via refs). Controlled components are generally preferred as they offer more predictability and easier validation. However, uncontrolled components can be better for performance with large forms or when integrating with non-React code."
+    },
+    {
+      "id": 5,
+      "question": "Tell us something about useFormStatus() (explore and explain)",
+      "answer": "useFormStatus() is a React Hook (currently experimental) that provides status information about a <form> during submission. It returns an object with properties like 'pending', 'data', 'method', and 'action'. This hook must be used within a component rendered inside a <form>, and it's useful for showing loading states during form submissions without prop drilling."
+    }
+  ]

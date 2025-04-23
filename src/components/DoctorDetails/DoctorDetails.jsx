@@ -20,13 +20,13 @@ const DoctorDetails = () => {
         if (alreadyBooked) {
             toast.error(`You already have an appointment with ${name}`);
             return;
+        } else {
+            toast.success(`You have successfully booked this appointment with ${name}`);
+            addDoctor(doctorProfile);
+            navigate("/bookings")
         }
-
-        // toast.success(`You have successfully booked this appointment with ${name}`);
-        addDoctor(doctorProfile);
-        navigate("/bookings")
     }
- 
+
     return (
         <div className="flex flex-col gap-5 my-6">
             <div className="rounded-lg p-6 bg-white space-y-4 text-center">
@@ -64,7 +64,7 @@ const DoctorDetails = () => {
 
                 <p className="yellow-badge flex items-center gap-2"><BiError /> Due to high patient Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
                 <button onClick={() => handleAppointment()} className="btn-my-default cursor-pointer text-center">Book Appointment</button>
-                <ToastContainer/>
+                <ToastContainer />
             </div>
         </div>
     )

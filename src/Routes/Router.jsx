@@ -4,6 +4,9 @@ import Home from "../pages/Home/Home";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import DoctorDetails from "../components/DoctorDetails/DoctorDetails";
 import Bookings from "../pages/Bookings/Bookings";
+import Blogs from "../pages/Blogs/Blogs";
+import { Suspense } from "react";
+import Loader from "../components/Loader/Loader";
 
 export const Router = createBrowserRouter([
     {
@@ -14,22 +17,23 @@ export const Router = createBrowserRouter([
             {
                 index: true,
                 path: "/",
-                loader: () => fetch('/DoctorsData.json'),
+                loader: () => fetch('../DoctorsData.json'),
                 Component: Home
             },
             {
                 path: "doctor-details/:id",
-                loader: () => fetch('/DoctorsData.json'),
+                loader: () => fetch('../DoctorsData.json'),
                 Component: DoctorDetails
             },
             {
                 path: "bookings",
-                loader: () => fetch('DoctorsData.json'),
+                loader: () => fetch('../DoctorsData.json'),
                 Component: Bookings
             },
             {
                 path: "blogs",
-                element: <div>Hey from home</div>
+                loader: () => fetch('../BlogQuestions.json'),
+                Component: Blogs
             }
 
         ]
