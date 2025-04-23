@@ -1,42 +1,22 @@
-
-const getBookedDoctor = () => {
-    const bookedDoctor = localStorage.getItem("bookedDoctor");
-
-    if (bookedDoctor) {
-        const parsedDoctor = JSON.parse(bookedDoctor);
-        return parsedDoctor;
-    }
-    else {
+export const getDoctor = () => {
+    const doctors = localStorage.getItem("Doctors");
+    if(doctors) return JSON.parse(doctors)
         return [];
-    }
 }
 
+export const addDoctor = (doctorProfile) => {
+    const doctors = getDoctor();
+    const isExist = doctors.find(doctor => doctor.id === doctorProfile.id);
+    if(isExist) return alert("It exists");
 
-const setBookDoctor = (id) => {
-    const bookedDoctor = getBookedDoctor();
-
-    if (bookedDoctor.includes(id)) {
-        alert("Sorry, it exists")
-    }
-    else {
-        bookedDoctor.push(id);
-        const data = JSON.stringify(bookedDoctor);
-        localStorage.setItem("bookedDoctor", data);
-    }
-
-    const updatedBookings = bookedDoctor.filter(booking => booking !== id);
-    bookedDoctor.push(updatedBookings);
-
-
-}
-const removeDoctor = (id) => {
-    const bookedDoctor = getBookedDoctor();
-
-    const updatedBookings = bookedDoctor.filter(booking => booking !== id);
-
-    const data = JSON.stringify(updatedBookings);
-    localStorage.setItem("bookedDoctor", data);
-
+    doctors.push(doctorProfile);
+    localStorage.setItem("Doctors", JSON.stringify(doctors));
+    
 }
 
-export { setBookDoctor, getBookedDoctor, removeDoctor };
+export const cancelDoctorBooking = (id) => {
+    const doctors = getDoctor();
+    const remainingDoctors = doctors.filter(doctor => doctor.id !== id);
+    
+    localStorage.setItem("Doctors", JSON.stringify(remainingDoctors));
+}

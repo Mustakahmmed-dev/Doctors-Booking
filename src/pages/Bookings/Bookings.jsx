@@ -1,19 +1,21 @@
 import { useLoaderData } from "react-router";
 import BookingCard from "../BookingCard/BookingCard";
 import { Bar, BarChart, Tooltip, XAxis, YAxis } from "recharts";
-import { getBookedDoctor, removeDoctor } from "../../utility/utility";
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
+import { cancelDoctorBooking, getDoctor } from "../../utility/utility";
 
 
 const Bookings = () => {
-    const loadedData = useLoaderData();
-    // const bookedDoctorsList = getBookedDoctor();
-    const [bookedDoctorsList, setBookedDoctorsList] = useState(getBookedDoctor());
-    const bookedDoctors = loadedData.filter(data => bookedDoctorsList.includes(data.id));
+    // const loadedData = useLoaderData();
+    const [displayDoctors, setDisplayDoctors] = useState([]);
 
-    const handleRemoveDoctor = (id) => {
-        removeDoctor(id);
-        setBookedDoctorsList(prev => prev.filter(doctorId => doctorId !== id));
+    useEffect(() => {
+        setDisplayDoctors(getDoctor());
+    }, [])
+
+    const handleDelete = (id) => {
+        cancelDoctorBooking(id);
+        setDisplayDoctors(getDoctor());
     }
 
     // Triangle shape of the chart
@@ -37,7 +39,7 @@ const Bookings = () => {
     return (
         <div className="my-5 flex flex-col gap-7">
 
-            <div className="rounded-lg bg-white p-5">
+            {/* <div className="rounded-lg bg-white p-5">
                 <BarChart width={600} height={300} data={bookedDoctors}>
                     <XAxis dataKey="name"></XAxis>
                     <YAxis></YAxis>
@@ -46,7 +48,7 @@ const Bookings = () => {
 
                     </Bar>
                 </BarChart>
-            </div>
+            </div> */}
 
             <div className="space-y-4">
                 <div className="text-center">
@@ -54,11 +56,9 @@ const Bookings = () => {
                     <p>Our platform connects you with verified, experienced doctors across various specialties — all at your convenience.</p>
                 </div>
                 <div className="flex flex-col gap-4">
-                    <Suspense fallback={<span>Loading data....</span>}>
                         {
-                            bookedDoctors.map(doctor => <BookingCard key={doctor.id} doctor={doctor} handleRemoveDoctor={handleRemoveDoctor}></BookingCard>)
+                            displayDoctors.map(doctor => <BookingCard key={doctor.id} doctor={doctor} handleDelete={handleDelete}></BookingCard>)
                         }
-                    </Suspense>
                 </div>
             </div>
 

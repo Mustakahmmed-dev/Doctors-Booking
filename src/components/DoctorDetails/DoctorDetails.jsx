@@ -1,6 +1,7 @@
-import { useLoaderData, useParams, Link } from "react-router";
+import { useLoaderData, useParams, Link, useNavigate } from "react-router";
 import { BiError } from "react-icons/bi";
-import { setBookDoctor } from "../../utility/utility";
+import { ToastContainer, toast } from "react-toastify";
+import { addDoctor } from "../../utility/utility";
 
 const DoctorDetails = () => {
     const doctorData = useLoaderData();
@@ -8,11 +9,7 @@ const DoctorDetails = () => {
     const paramsID = parseInt(para.id);
 
     const doctorProfile = doctorData.find(doctor => paramsID === doctor.id);
-    const {id, name, doctor_image, education, hospital_affiliation, registration_number, consultation_fee, availability } = doctorProfile;
-
-    const handleAppointmentBtn = (id) => {
-        setBookDoctor(id)
-    }
+    const { id, name, doctor_image, education, hospital_affiliation, registration_number, consultation_fee, availability } = doctorProfile;
 
     return (
         <div className="flex flex-col gap-5 my-6">
@@ -50,7 +47,7 @@ const DoctorDetails = () => {
                 <div className="border border-gray-300"></div>
 
                 <p className="yellow-badge flex items-center gap-2"><BiError /> Due to high patient Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-                <button onClick={() => handleAppointmentBtn(id)} className="btn-my-default cursor-pointer text-center">Book Appointment</button>
+                <button onClick={() => addDoctor(doctorProfile)} className="btn-my-default cursor-pointer text-center">Book Appointment</button>
             </div>
         </div>
     )
