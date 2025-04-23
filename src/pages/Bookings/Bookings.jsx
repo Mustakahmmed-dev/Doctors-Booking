@@ -3,6 +3,7 @@ import BookingCard from "../BookingCard/BookingCard";
 import { Bar, BarChart, Tooltip, XAxis, YAxis } from "recharts";
 import { Suspense, useEffect, useState } from "react";
 import { cancelDoctorBooking, getDoctor } from "../../utility/utility";
+import EmptyBookings from "../../components/EmptyBookings/EmptyBookings";
 
 
 const Bookings = () => {
@@ -17,6 +18,8 @@ const Bookings = () => {
         cancelDoctorBooking(id);
         setDisplayDoctors(getDoctor());
     }
+
+    if(displayDoctors.length < 1) return <EmptyBookings></EmptyBookings>
 
     // Triangle shape of the chart
     const TriangleBar = (props) => {
