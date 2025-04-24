@@ -9,7 +9,7 @@ const BookingCard = ({ doctor, handleDelete }) => {
     const handleCancelDoctorBooking = (id) => {
         cancelDoctorBooking(id);
         handleDelete(id);
-        toast.success(`Your appointment with has been cancelled`)
+        toast.success(`Your appointment with has been ${name} cancelled`)
     }
 
     return (
